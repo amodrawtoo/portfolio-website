@@ -1,0 +1,2675 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Amod Sanjay Rawtoo | AI & ML Developer</title>
+
+  <meta name="description"
+    content="Portfolio of Amod Sanjay Rawtoo — AI & Machine Learning student, Python developer, drone and embedded systems enthusiast from Pune, India.">
+
+  <meta name="keywords"
+    content="Amod Rawtoo, AI, Machine Learning, Python, ESP32, Drone, Embedded Systems, Pune Developer">
+
+  <meta name="author" content="Amod Sanjay Rawtoo">
+
+  <meta property="og:title" content="Amod Sanjay Rawtoo | AI & ML Developer">
+  <meta property="og:description"
+    content="AI & ML student building practical technology solutions, AI projects and embedded systems.">
+  <meta property="og:type" content="website">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+
+    :root {
+      --bg: #070810;
+      --surface: #10121d;
+      --surface-2: #171a28;
+      --surface-3: #1d2133;
+
+      --text: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+
+      --primary: #8b5cf6;
+      --secondary: #38bdf8;
+
+      --gradient: linear-gradient(
+        135deg,
+        #8b5cf6,
+        #38bdf8
+      );
+
+      --border: rgba(139, 92, 246, 0.18);
+      --border-hover: rgba(56, 189, 248, 0.55);
+
+      --card: rgba(16, 18, 29, 0.78);
+
+      --shadow:
+        0 20px 50px rgba(0, 0, 0, 0.28);
+
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-full: 999px;
+
+      --transition: 0.3s cubic-bezier(.16,1,.3,1);
+    }
+
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface-2: #f1f5f9;
+      --surface-3: #e2e8f0;
+
+      --text: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+
+      --card: rgba(255,255,255,.82);
+
+      --border: rgba(99,102,241,.15);
+      --border-hover: rgba(14,165,233,.45);
+
+      --shadow:
+        0 20px 50px rgba(15,23,42,.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+      transition: background .3s ease, color .3s ease;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    #neuralCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+      opacity: .5;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 40px));
+      margin: auto;
+    }
+
+    /* NAVBAR */
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+
+      background: rgba(7,8,16,.75);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+
+      border-bottom: 1px solid var(--border);
+    }
+
+    [data-theme="light"] .navbar {
+      background: rgba(248,250,252,.82);
+    }
+
+    .nav-container {
+      height: 72px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+
+      font-size: 1.2rem;
+      font-weight: 800;
+    }
+
+    .logo i {
+      color: var(--primary);
+    }
+
+    .logo span {
+      color: var(--secondary);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      font-size: .88rem;
+      font-weight: 600;
+
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--secondary);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .theme-btn,
+    .menu-btn {
+      width: 42px;
+      height: 42px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 50%;
+      border: 1px solid var(--border);
+
+      background: var(--surface);
+      color: var(--text);
+
+      cursor: pointer;
+
+      transition: var(--transition);
+    }
+
+    .theme-btn:hover,
+    .menu-btn:hover {
+      border-color: var(--secondary);
+      transform: translateY(-2px);
+    }
+
+    .menu-btn {
+      display: none;
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 100vh;
+      padding-top: 110px;
+
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 70px;
+      align-items: center;
+    }
+
+    .availability {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+
+      padding: 8px 14px;
+
+      border-radius: var(--radius-full);
+
+      background: rgba(139,92,246,.1);
+      border: 1px solid rgba(139,92,246,.28);
+
+      color: var(--secondary);
+      font-size: .82rem;
+      font-family: "JetBrains Mono", monospace;
+
+      margin-bottom: 22px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+
+      border-radius: 50%;
+      background: #22c55e;
+
+      box-shadow: 0 0 12px #22c55e;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.7rem, 6vw, 4.5rem);
+      line-height: 1.08;
+      font-weight: 800;
+
+      margin-bottom: 20px;
+    }
+
+    .gradient-text {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-description {
+      max-width: 650px;
+
+      color: var(--text-secondary);
+
+      font-size: 1.08rem;
+
+      margin-bottom: 30px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* BUTTONS */
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+
+      padding: 12px 20px;
+
+      border-radius: var(--radius-full);
+
+      font-size: .9rem;
+      font-weight: 700;
+
+      border: 1px solid transparent;
+
+      cursor: pointer;
+
+      transition: var(--transition);
+    }
+
+    .btn-primary {
+      color: white;
+      background: var(--gradient);
+
+      box-shadow:
+        0 8px 25px rgba(139,92,246,.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+
+      box-shadow:
+        0 12px 30px rgba(139,92,246,.4);
+    }
+
+    .btn-secondary {
+      color: var(--text);
+      background: var(--surface);
+
+      border-color: var(--border);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-3px);
+      border-color: var(--secondary);
+    }
+
+    /* PROFILE */
+
+    .profile-wrapper {
+      display: flex;
+      justify-content: center;
+    }
+
+    .profile-card {
+      width: 330px;
+
+      padding: 25px;
+
+      border-radius: var(--radius-lg);
+
+      background: var(--card);
+
+      border: 1px solid var(--border);
+
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+
+      box-shadow: var(--shadow);
+
+      text-align: center;
+
+      position: relative;
+      overflow: hidden;
+
+      transition: var(--transition);
+    }
+
+    .profile-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--border-hover);
+    }
+
+    .profile-card::before {
+      content: "";
+
+      position: absolute;
+      width: 180px;
+      height: 180px;
+
+      background: var(--primary);
+
+      filter: blur(90px);
+      opacity: .25;
+
+      top: -90px;
+      right: -70px;
+    }
+
+    .profile-photo {
+      position: relative;
+
+      width: 190px;
+      height: 190px;
+
+      object-fit: cover;
+
+      border-radius: 50%;
+
+      border: 4px solid var(--primary);
+
+      box-shadow:
+        0 0 35px rgba(139,92,246,.35);
+
+      margin-bottom: 20px;
+    }
+
+    .profile-name {
+      font-size: 1.25rem;
+      font-weight: 800;
+    }
+
+    .profile-role {
+      color: var(--secondary);
+      font-family: "JetBrains Mono", monospace;
+      font-size: .8rem;
+
+      margin-top: 5px;
+    }
+
+    .profile-socials {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+
+      margin-top: 18px;
+    }
+
+    .profile-socials a {
+      width: 38px;
+      height: 38px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 50%;
+
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+
+      transition: var(--transition);
+    }
+
+    .profile-socials a:hover {
+      color: var(--secondary);
+      border-color: var(--secondary);
+      transform: translateY(-3px);
+    }
+
+    /* SECTIONS */
+
+    section {
+      padding: 100px 0;
+      scroll-margin-top: 70px;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-tag {
+      display: block;
+
+      color: var(--secondary);
+
+      font-family: "JetBrains Mono", monospace;
+      font-size: .78rem;
+
+      letter-spacing: 2px;
+      text-transform: uppercase;
+
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 2.7rem);
+      font-weight: 800;
+    }
+
+    /* CARDS */
+
+    .card {
+      padding: 28px;
+
+      background: var(--card);
+
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+
+      box-shadow: var(--shadow);
+
+      transition: var(--transition);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: var(--border-hover);
+    }
+
+    /* ABOUT */
+
+    .about-text {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      line-height: 1.9;
+    }
+
+    .details {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+
+      margin-top: 30px;
+      padding-top: 25px;
+
+      border-top: 1px solid var(--border);
+    }
+
+    .detail {
+      display: flex;
+      gap: 13px;
+      align-items: center;
+    }
+
+    .detail i {
+      color: var(--secondary);
+      font-size: 1.2rem;
+    }
+
+    .detail small {
+      display: block;
+      color: var(--text-muted);
+      font-size: .72rem;
+    }
+
+    .detail strong {
+      font-size: .9rem;
+    }
+
+    /* SKILLS */
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .skill-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      color: var(--secondary);
+
+      font-size: 1.05rem;
+      font-weight: 800;
+
+      margin-bottom: 20px;
+    }
+
+    .skill-title i {
+      font-size: 1.2rem;
+    }
+
+    .skill-list {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .skill {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      padding: 10px 13px;
+
+      background: var(--surface-2);
+      border-radius: var(--radius-sm);
+
+      font-size: .86rem;
+    }
+
+    .tag {
+      padding: 4px 8px;
+
+      border-radius: 6px;
+
+      background: rgba(139,92,246,.13);
+
+      color: var(--primary);
+
+      font-family: "JetBrains Mono", monospace;
+      font-size: .65rem;
+    }
+
+    /* PROJECTS */
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
+    }
+
+    .project-icon {
+      font-size: 2rem;
+      color: var(--secondary);
+
+      margin-bottom: 18px;
+    }
+
+    .project-title {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+
+    .project-description {
+      color: var(--text-secondary);
+      font-size: .9rem;
+
+      margin-bottom: 20px;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+
+      margin-bottom: 22px;
+    }
+
+    .tech {
+      padding: 5px 9px;
+
+      border-radius: 6px;
+
+      background: var(--surface-2);
+
+      color: var(--secondary);
+
+      font-family: "JetBrains Mono", monospace;
+      font-size: .68rem;
+    }
+
+    .project-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    /* CERTIFICATIONS */
+
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .cert-icon {
+      width: 50px;
+      height: 50px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 12px;
+
+      background: rgba(139,92,246,.13);
+
+      color: var(--primary);
+
+      font-size: 1.3rem;
+
+      margin-bottom: 16px;
+    }
+
+    .cert-title {
+      font-size: 1rem;
+      margin-bottom: 7px;
+    }
+
+    .cert-issuer {
+      color: var(--secondary);
+      font-size: .82rem;
+      font-weight: 600;
+
+      margin-bottom: 15px;
+    }
+
+    .cert-note {
+      color: var(--text-muted);
+      font-size: .75rem;
+    }
+
+    /* EXPERIENCE / EDUCATION */
+
+    .journey-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .journey-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      margin-bottom: 25px;
+
+      font-size: 1.3rem;
+    }
+
+    .journey-title i {
+      color: var(--secondary);
+    }
+
+    .timeline {
+      position: relative;
+
+      border-left: 2px solid var(--border);
+
+      padding-left: 25px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 35px;
+    }
+
+    .timeline-item::before {
+      content: "";
+
+      position: absolute;
+
+      left: -34px;
+      top: 6px;
+
+      width: 14px;
+      height: 14px;
+
+      border-radius: 50%;
+
+      background: var(--primary);
+
+      border: 3px solid var(--bg);
+    }
+
+    .timeline-date {
+      color: var(--secondary);
+
+      font-family: "JetBrains Mono", monospace;
+      font-size: .75rem;
+
+      margin-bottom: 5px;
+    }
+
+    .timeline-role {
+      font-size: 1.1rem;
+      font-weight: 800;
+    }
+
+    .timeline-company {
+      color: var(--text-secondary);
+      font-size: .9rem;
+
+      margin-bottom: 10px;
+    }
+
+    .timeline-list {
+      color: var(--text-secondary);
+
+      padding-left: 18px;
+
+      font-size: .85rem;
+    }
+
+    /* GITHUB */
+
+    .github-card {
+      text-align: center;
+      padding: 50px 30px;
+    }
+
+    .github-icon {
+      font-size: 3rem;
+      margin-bottom: 15px;
+    }
+
+    .github-card p {
+      max-width: 650px;
+      margin: 10px auto 25px;
+
+      color: var(--text-secondary);
+    }
+
+    /* GOALS + LANGUAGES */
+
+    .two-column {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 30px;
+    }
+
+    .goals {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .goal {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .goal i {
+      color: var(--primary);
+    }
+
+    .languages {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .language {
+      text-align: center;
+    }
+
+    .language strong {
+      display: block;
+    }
+
+    .language span {
+      color: var(--secondary);
+
+      font-family: "JetBrains Mono", monospace;
+      font-size: .7rem;
+    }
+
+    /* CONTACT */
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 35px;
+    }
+
+    .contact-description {
+      color: var(--text-secondary);
+      font-size: .9rem;
+
+      margin: 12px 0 25px;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      color: var(--text-secondary);
+
+      transition: var(--transition);
+    }
+
+    .contact-link:hover {
+      color: var(--secondary);
+    }
+
+    .socials {
+      display: flex;
+      gap: 10px;
+
+      margin-top: 25px;
+    }
+
+    .social {
+      width: 44px;
+      height: 44px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 50%;
+
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+
+      transition: var(--transition);
+    }
+
+    .social:hover {
+      color: var(--secondary);
+      border-color: var(--secondary);
+
+      transform: translateY(-3px);
+    }
+
+    /* CONTACT FORM */
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      color: var(--text-secondary);
+      font-size: .8rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+
+      padding: 12px 14px;
+
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+
+      background: var(--surface-2);
+
+      color: var(--text);
+
+      outline: none;
+
+      transition: var(--transition);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--primary);
+    }
+
+    .form-group textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    /* FOOTER */
+
+    footer {
+      padding: 30px 0;
+
+      border-top: 1px solid var(--border);
+
+      text-align: center;
+
+      color: var(--text-muted);
+
+      font-size: .8rem;
+    }
+
+    /* BACK TO TOP */
+
+    .top-btn {
+      position: fixed;
+
+      right: 25px;
+      bottom: 25px;
+
+      width: 45px;
+      height: 45px;
+
+      display: grid;
+      place-items: center;
+
+      border: none;
+      border-radius: 50%;
+
+      background: var(--gradient);
+      color: white;
+
+      cursor: pointer;
+
+      opacity: 0;
+      visibility: hidden;
+
+      transform: translateY(15px);
+
+      transition: var(--transition);
+
+      z-index: 999;
+    }
+
+    .top-btn.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 950px) {
+
+      .hero-grid,
+      .two-column,
+      .contact-grid,
+      .journey-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        text-align: center;
+      }
+
+      .hero-description {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+
+      .profile-wrapper {
+        margin-top: 20px;
+      }
+
+      .details {
+        grid-template-columns: 1fr;
+      }
+
+      .cert-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 760px) {
+
+      .container {
+        width: min(100% - 28px, 1180px);
+      }
+
+      .nav-links {
+        position: fixed;
+
+        top: 72px;
+        left: 14px;
+        right: 14px;
+
+        flex-direction: column;
+
+        padding: 25px;
+
+        background: var(--surface);
+
+        border: 1px solid var(--border);
+        border-radius: 16px;
+
+        transform: translateY(-150%);
+        opacity: 0;
+
+        transition: var(--transition);
+      }
+
+      .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .menu-btn {
+        display: grid;
+      }
+
+      .skills-grid,
+      .projects-grid,
+      .cert-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .goals {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 2.7rem;
+      }
+
+      section {
+        padding: 75px 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <canvas id="neuralCanvas"></canvas>
+
+  <!-- NAVIGATION -->
+
+  <nav class="navbar">
+
+    <div class="container nav-container">
+
+      <a href="#home" class="logo">
+        <i class="fa-solid fa-brain"></i>
+        <span>Amod</span>Rawtoo
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#certifications">Certifications</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+
+      </ul>
+
+      <div class="nav-actions">
+
+        <button class="theme-btn" id="themeBtn" aria-label="Change theme">
+          <i class="fa-solid fa-moon" id="themeIcon"></i>
+        </button>
+
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+      </div>
+
+    </div>
+
+  </nav>
+
+  <main>
+
+    <!-- HERO -->
+
+    <section class="hero" id="home">
+
+      <div class="container hero-grid">
+
+        <div>
+
+          <div class="availability">
+            <span class="status-dot"></span>
+            Open to Projects & Opportunities
+          </div>
+
+          <h1>
+            Hi, I'm
+            <span class="gradient-text">Amod</span>
+            
+          </h1>
+
+          <p class="hero-description">
+            B.Tech student specializing in Artificial Intelligence
+            and Machine Learning, passionate about Python,
+            AI, automation, drone technology and building
+            practical technology solutions.
+          </p>
+
+          <div class="hero-buttons">
+
+            <a href="#projects" class="btn btn-secondary">
+            <i class="fa-solid fa-folder-open"></i>
+            View Projects
+            </a>
+
+            <!-- YOUR C.V. -->
+
+            <a
+              href="amodrawtooC.V.pdf"
+              download="Amod_Rawtoo_CV.pdf"
+              class="btn btn-secondary"
+            >
+              <i class="fa-solid fa-file-arrow-down"></i>
+              Download C.V.
+            </a>
+
+            <a href="#contact" class="btn btn-secondary">
+              <i class="fa-solid fa-envelope"></i>
+              Contact Me
+            </a>
+
+          </div>
+
+        </div>
+
+        <!-- PROFILE -->
+
+        <div class="profile-wrapper">
+
+          <div class="profile-card">
+
+            <!-- YOUR PROFILE PHOTO -->
+
+            <img
+              src="img10.png"
+              alt="Amod Sanjay Rawtoo"
+              class="profile-photo"
+            >
+
+            <div class="profile-name">
+              Amod Sanjay Rawtoo
+            </div>
+
+            <div class="profile-role">
+              AI/ML • Embedded Systems
+            </div>
+
+            <div class="profile-socials">
+
+              <a
+                href="https://github.com/amodrawtoo"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+              >
+                <i class="fa-brands fa-github"></i>
+              </a>
+
+              <a
+                href="https://www.linkedin.com/in/amod-rawtoo"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+              >
+                <i class="fa-brands fa-linkedin-in"></i>
+              </a>
+
+              <a
+                href="https://www.instagram.com/just_amod"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+              >
+                <i class="fa-brands fa-instagram"></i>
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ABOUT -->
+
+    <section id="about">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <span class="section-tag">// Introduction</span>
+
+          <h2 class="section-title">
+            About Me
+          </h2>
+
+        </div>
+
+        <div class="card">
+
+          <p class="about-text">
+            I am a B.Tech student specializing in Artificial
+            Intelligence and Machine Learning, passionate about
+            programming, AI, automation, drone technology and
+            building practical technology solutions. I enjoy
+            learning new technologies, developing projects and
+            continuously improving my technical and
+            problem-solving skills.
+          </p>
+
+          <div class="details">
+
+            <div class="detail">
+
+              <i class="fa-solid fa-location-dot"></i>
+
+              <div>
+                <small>Location</small>
+                <strong>Pune, Maharashtra, India</strong>
+              </div>
+
+            </div>
+
+            <div class="detail">
+
+              <i class="fa-solid fa-graduation-cap"></i>
+
+              <div>
+                <small>Major</small>
+                <strong>B.Tech in AI & Machine Learning</strong>
+              </div>
+
+            </div>
+
+            <div class="detail">
+
+              <i class="fa-solid fa-building-columns"></i>
+
+              <div>
+                <small>Institution</small>
+                <strong>Dnyanvilas College of Engineering</strong>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- SKILLS -->
+
+    <section id="skills">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <span class="section-tag">// Capabilities</span>
+
+          <h2 class="section-title">
+            Technical Expertise
+          </h2>
+
+        </div>
+
+        <div class="skills-grid">
+
+          <div class="card">
+
+            <div class="skill-title">
+              <i class="fa-solid fa-code"></i>
+              Programming
+            </div>
+
+            <div class="skill-list">
+
+              <div class="skill">
+                <span>Python</span>
+                <span class="tag">Core</span>
+              </div>
+
+              <div class="skill">
+                <span>C Programming</span>
+                <span class="tag">Proficient</span>
+              </div>
+
+              <div class="skill">
+                <span>C++ Programming</span>
+                <span class="tag">Proficient</span>
+              </div>
+
+              <div class="skill">
+                <span>Scratch</span>
+                <span class="tag">Logic</span>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="card">
+
+            <div class="skill-title">
+              <i class="fa-solid fa-brain"></i>
+              AI & Data
+            </div>
+
+            <div class="skill-list">
+
+              <div class="skill">
+                <span>Artificial Intelligence</span>
+                <span class="tag">Core</span>
+              </div>
+
+              <div class="skill">
+                <span>Machine Learning</span>
+                <span class="tag">Applied</span>
+              </div>
+
+              <div class="skill">
+                <span>Data Analysis</span>
+                <span class="tag">Practical</span>
+              </div>
+
+              <div class="skill">
+                <span>NumPy</span>
+                <span class="tag">Library</span>
+              </div>
+
+              <div class="skill">
+                <span>Pandas</span>
+                <span class="tag">Library</span>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="card">
+
+            <div class="skill-title">
+              <i class="fa-solid fa-microchip"></i>
+              Drone & Embedded
+            </div>
+
+            <div class="skill-list">
+
+              <div class="skill">
+                <span>Drone System Architecture</span>
+                <span class="tag">Architecture</span>
+              </div>
+
+              <div class="skill">
+                <span>ESP32</span>
+                <span class="tag">Hardware</span>
+              </div>
+
+              <div class="skill">
+                <span>Arduino IDE</span>
+                <span class="tag">Environment</span>
+              </div>
+
+              <div class="skill">
+                <span>Sensor Interfacing & IMU</span>
+                <span class="tag">Hardware</span>
+              </div>
+
+              <div class="skill">
+                <span>Wi-Fi / Bluetooth</span>
+                <span class="tag">Protocols</span>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="card">
+
+            <div class="skill-title">
+              <i class="fa-solid fa-cubes"></i>
+              Concepts & Tools
+            </div>
+
+            <div class="skill-list">
+
+              <div class="skill">
+                <span>Object-Oriented Programming</span>
+                <span class="tag">Concept</span>
+              </div>
+
+              <div class="skill">
+                <span>Problem Solving</span>
+                <span class="tag">Core</span>
+              </div>
+
+              <div class="skill">
+                <span>Cybersecurity Fundamentals</span>
+                <span class="tag">Security</span>
+              </div>
+
+              <div class="skill">
+                <span>Git & GitHub</span>
+                <span class="tag">Version Control</span>
+              </div>
+
+              <div class="skill">
+                <span>VS Code</span>
+                <span class="tag">Tooling</span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- PROJECTS -->
+
+    <section id="projects">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <span class="section-tag">// Portfolio</span>
+
+          <h2 class="section-title">
+            Featured Projects
+          </h2>
+
+        </div>
+
+        <div class="projects-grid">
+
+          <div class="card">
+
+            <div class="project-icon">
+              <i class="fa-solid fa-helicopter"></i>
+            </div>
+
+            <h3 class="project-title">
+              ESP32 Drone Flight Controller
+            </h3>
+
+            <p class="project-description">
+              The ESP32-Based Drone Flight Controller is an embedded systems project developed at Dnyanvilas College of Engineering (DVCOE), affiliated with Dr. Babasaheb Ambedkar Technological University. 
+              The project focuses on developing a drone flight control system using the ESP32 microcontroller and the LiteWing drone kit.
+              The system integrates an ESP32 DevKit, MPU6050 motion sensor, brushless motors, and Electronic Speed Controllers (ESCs) to form the core hardware setup. 
+              The ESP32 serves as the main controller, while the MPU6050 provides motion and orientation data. 
+              The system is designed around the interaction between sensor inputs, microcontroller processing, and motor control.
+              This project provided practical experience in embedded programming, sensor interfacing, drone hardware integration, and flight-control system development.
+              Using the Arduino IDE and C/C++, the project strengthened our understanding of how microcontrollers coordinate electronic components in a drone system and provided a foundation for further exploration of robotics, automation, and unmanned aerial vehicle technology.
+            </p>
+            
+
+            <a href="dronereport.pdf" class="btn btn-secondary">
+            <i class="fa-solid fa-folder-open"></i>
+            View Report
+            </a>
+
+            <div class="tech-stack">
+              <span class="tech">ESP32</span>
+              <span class="tech">Arduino IDE</span>
+              <span class="tech">IMU</span>
+              <span class="tech">Embedded Systems</span>
+            </div>
+
+            <div class="project-buttons">
+
+              <a href="#contact" class="btn btn-secondary">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                Discuss Project
+              </a>
+
+              <a
+                href="https://github.com/amodrawtoo"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-secondary"
+              >
+                <i class="fa-brands fa-github"></i>
+                GitHub
+              </a>
+
+            </div>
+
+          </div>
+
+          <div class="card">
+
+            <div class="project-icon">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+            </div>
+
+            <h3 class="project-title">
+              Batch Study Buddy — AI Peer Study Assistant
+            </h3>
+
+            <p class="project-description">
+              Developed an AI-powered peer study assistant on Botpress that parses and 
+              indexes academic documents to provide student batches with instant, 
+              context-aware answers and study summaries.
+            </p>
+            <div id="studyBuddyModal" class="study-buddy-modal">
+  <div class="study-buddy-panel">
+
+    <div class="study-buddy-header">
+      <h3>AI Study Buddy</h3>
+
+      <button
+        type="button"
+        class="study-buddy-close"
+        onclick="closeStudyBuddy()"
+        aria-label="Close chatbot"
+      >
+        &times;
+      </button>
+    </div>
+
+    <div class="study-buddy-content">
+      <iframe
+        src="https://cdn.botpress.cloud/webchat/v5.0/shareable.html?configUrl=https://files.bpcontent.cloud/2026/10/23/15/20261023155512-F9843NY4.json"
+        title="Batch assistant AI"
+        width="80%"
+        height="400"
+        style="border:0; border-radius:12px;"
+        allow="clipboard-read; clipboard-write"
+      ></iframe>
+    </div>
+
+  </div>
+</div>
+
+            <div class="tech-stack">
+              <span class="tech">Botpress Studio</span>
+              <span class="tech">Knowledge Base</span>
+              <span class="tech">Vibe Builder</span>
+              <span class="tech">Webchat Channels</span>
+            </div>
+
+            <div class="project-buttons">
+
+              <a href="#contact" class="btn btn-secondary">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                Discuss Project
+              </a>
+
+              <a
+                href="https://github.com/amodrawtoo"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-secondary"
+              >
+                <i class="fa-brands fa-github"></i>
+                GitHub
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- CERTIFICATIONS -->
+
+    <section id="certifications">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <span class="section-tag">// Verification</span>
+
+          <h2 class="section-title">
+            Certifications
+          </h2>
+
+        </div>
+
+        <div class="cert-grid">
+
+          <div class="card">
+
+            <div class="cert-icon">
+              <i class="fa-solid fa-helicopter"></i>
+            </div>
+
+            <h3 class="cert-title">
+              Industry Certified Drone Developer
+            </h3>
+
+            <div class="cert-issuer">
+              Reliance
+            </div>
+
+            <div class="cert-note">
+              Industry certification in drone development.
+            </div>
+
+          </div>
+
+          <div class="card">
+
+            <div class="cert-icon">
+              <i class="fa-brands fa-python"></i>
+            </div>
+
+            <h3 class="cert-title">
+              Python Programmer Certification
+            </h3>
+
+            <div class="cert-issuer">
+              Infosys
+            </div>
+
+            <div class="cert-note">
+              Certification in Python programming.
+            </div>
+
+          </div>
+
+          <div class="card">
+
+            <div class="cert-icon">
+              <i class="fa-solid fa-code"></i>
+            </div>
+
+            <h3 class="cert-title">
+              C & C++ Certification
+            </h3>
+
+            <div class="cert-issuer">
+              Disha Computer Institution
+            </div>
+
+            <div class="cert-note">
+              Certification in C and C++ programming.
+            </div>
+
+          </div>
+
+          <div class="card">
+
+            <div class="cert-icon">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <h3 class="cert-title">
+              Cyber Security Essentials
+            </h3>
+
+            <div class="cert-issuer">
+              Cybersecurity Fundamentals
+            </div>
+
+            <div class="cert-note">
+              Foundational cybersecurity knowledge.
+            </div>
+
+          </div>
+
+          <div class="card">
+
+            <div class="cert-icon">
+              <i class="fa-solid fa-shapes"></i>
+            </div>
+
+            <h3 class="cert-title">
+              Visual Block Programming
+            </h3>
+
+            <div class="cert-issuer">
+              Scratch
+            </div>
+
+            <div class="cert-note">
+              Visual programming and logical thinking.
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- EXPERIENCE -->
+
+    <section id="experience">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <span class="section-tag">// Journey</span>
+
+          <h2 class="section-title">
+            Experience & Education
+          </h2>
+
+        </div>
+
+        <div class="journey-grid">
+
+          <div>
+
+            <h3 class="journey-title">
+              <i class="fa-solid fa-briefcase"></i>
+              Work Experience
+            </h3>
+
+            <div class="timeline">
+
+              <div class="timeline-item">
+
+                <div class="timeline-date">
+                  2 Months Duration
+                </div>
+
+                <div class="timeline-role">
+                  Sales Executive Officer
+                </div>
+
+                <div class="timeline-company">
+                  Q-GET
+                </div>
+
+                <ul class="timeline-list">
+
+                  <li>
+                    Handled direct customer communication
+                    and requirement gathering.
+                  </li>
+
+                  <li>
+                    Conducted lead generation and structured
+                    sales support.
+                  </li>
+
+                  <li>
+                    Provided clear product explanations
+                    tailored to client needs.
+                  </li>
+
+                </ul>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <div id="education">
+
+            <h3 class="journey-title">
+              <i class="fa-solid fa-graduation-cap"></i>
+              Education
+            </h3>
+
+            <div class="timeline">
+
+              <div class="timeline-item">
+
+                <div class="timeline-date">
+                  Pursuing
+                </div>
+
+                <div class="timeline-role">
+                  B.Tech in Artificial Intelligence
+                  & Machine Learning
+                </div>
+
+                <div class="timeline-company">
+                  Dnyanvilas College of Engineering
+                </div>
+
+                <p style="color:var(--text-muted);font-size:.82rem;">
+                  Affiliated with Dr. Babasaheb Ambedkar
+                  Technological University (DBATU).
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- GITHUB -->
+
+    <section>
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <span class="section-tag">// Open Source</span>
+
+          <h2 class="section-title">
+            Building in Public 🚀
+          </h2>
+
+        </div>
+
+        <div class="card github-card">
+
+          <div class="github-icon">
+            <i class="fa-brands fa-github"></i>
+          </div>
+
+          <h3>
+            Explore My GitHub
+          </h3>
+
+          <p>
+            Follow my development journey, projects,
+            experiments and continuous learning in
+            AI/ML, Python and embedded systems.
+          </p>
+
+          <a
+            href="https://github.com/amodrawtoo"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-primary"
+          >
+            <i class="fa-brands fa-github"></i>
+            Visit My GitHub
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- GOALS + LANGUAGES -->
+
+    <section>
+
+      <div class="container two-column">
+
+        <div>
+
+          <div
+            class="section-heading"
+            style="text-align:left;margin-bottom:25px;"
+          >
+
+            <span class="section-tag">// Vision</span>
+
+            <h2
+              class="section-title"
+              style="font-size:2rem;"
+            >
+              What I'm Working Toward
+            </h2>
+
+          </div>
+
+          <div class="goals">
+
+            <div class="card goal">
+              <i class="fa-solid fa-crosshairs"></i>
+              <span>Becoming a strong AI/ML developer</span>
+            </div>
+
+            <div class="card goal">
+              <i class="fa-solid fa-microchip"></i>
+              <span>Building practical AI products</span>
+            </div>
+
+            <div class="card goal">
+              <i class="fa-solid fa-lightbulb"></i>
+              <span>Developing startup ideas</span>
+            </div>
+
+            <div class="card goal">
+              <i class="fa-solid fa-code"></i>
+              <span>Improving problem-solving skills</span>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div>
+
+          <div
+            class="section-heading"
+            style="text-align:left;margin-bottom:25px;"
+          >
+
+            <span class="section-tag">// Communication</span>
+
+            <h2
+              class="section-title"
+              style="font-size:2rem;"
+            >
+              Languages
+            </h2>
+
+          </div>
+
+          <div class="languages">
+
+            <div class="card language">
+              <strong>English</strong>
+              <span>Intermediate</span>
+            </div>
+
+            <div class="card language">
+              <strong>Hindi</strong>
+              <span>Fluent</span>
+            </div>
+
+            <div class="card language">
+              <strong>Marathi</strong>
+              <span>Fluent</span>
+            </div>
+
+            <div class="card language">
+              <strong>Japanese</strong>
+              <span>Beginner</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- CONTACT -->
+
+    <section id="contact">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <span class="section-tag">// Get In Touch</span>
+
+          <h2 class="section-title">
+            Let's Connect
+          </h2>
+
+        </div>
+
+        <div class="card contact-grid">
+
+          <div>
+
+            <h3 style="font-size:1.5rem;">
+              Let's build something impactful.
+            </h3>
+
+            <p class="contact-description">
+              I am open to discussing AI/ML projects,
+              embedded engineering ideas, internship
+              opportunities, collaborations and startup ideas.
+            </p>
+
+            <div class="contact-links">
+
+              <a
+                href="https://github.com/amodrawtoo"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-link"
+              >
+                <i class="fa-brands fa-github"></i>
+                GitHub
+              </a>
+
+              <a
+                href="https://www.linkedin.com/in/amod-rawtoo"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-link"
+              >
+                <i class="fa-brands fa-linkedin"></i>
+                LinkedIn
+              </a>
+
+              <a
+                href="https://www.instagram.com/just_amod"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-link"
+              >
+                <i class="fa-brands fa-instagram"></i>
+                Instagram
+              </a>
+
+              <div class="contact-link">
+                <i class="fa-solid fa-location-dot"></i>
+                Pune, Maharashtra, India
+              </div>
+
+            </div>
+
+            <div class="socials">
+
+              <a
+                href="https://github.com/amodrawtoo"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social"
+                aria-label="GitHub"
+              >
+                <i class="fa-brands fa-github"></i>
+              </a>
+
+              <a
+                href="https://www.linkedin.com/in/amod-rawtoo"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social"
+                aria-label="LinkedIn"
+              >
+                <i class="fa-brands fa-linkedin-in"></i>
+              </a>
+
+              <a
+                href="https://www.instagram.com/just_amod"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social"
+                aria-label="Instagram"
+              >
+                <i class="fa-brands fa-instagram"></i>
+              </a>
+
+            </div>
+
+          </div>
+
+          <!-- CONTACT FORM -->
+
+          <form
+            class="form"
+            id="contactForm"
+          >
+
+            <div class="form-group">
+
+              <label for="name">
+                Your Name
+              </label>
+
+              <input
+                type="text"
+                id="name"
+                placeholder="Your name"
+                required
+              >
+
+            </div>
+
+            <div class="form-group">
+
+              <label for="email">
+                Your Email
+              </label>
+
+              <input
+                type="email"
+                id="email"
+                placeholder="your@email.com"
+                required
+              >
+
+            </div>
+
+            <div class="form-group">
+
+              <label for="subject">
+                Subject
+              </label>
+
+              <input
+                type="text"
+                id="subject"
+                placeholder="Project / Opportunity"
+                required
+              >
+
+            </div>
+
+            <div class="form-group">
+
+              <label for="message">
+                Message
+              </label>
+
+              <textarea
+                id="message"
+                placeholder="Write your message..."
+                required
+              ></textarea>
+
+            </div>
+
+            <button
+              type="submit"
+              class="btn btn-primary"
+            >
+              <i class="fa-solid fa-paper-plane"></i>
+              Prepare Message
+            </button>
+
+            <p
+              id="formStatus"
+              style="
+                display:none;
+                color:var(--secondary);
+                font-size:.8rem;
+                text-align:center;
+              "
+            ></p>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <div class="container">
+
+      <p>
+        ©️ <span id="year"></span>
+        Amod Sanjay Rawtoo.
+        Built with focus & precision.
+      </p>
+
+    </div>
+
+  </footer>
+
+  <!-- BACK TO TOP -->
+
+  <button
+    class="top-btn"
+    id="topBtn"
+    aria-label="Back to top"
+  >
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- JAVASCRIPT -->
+
+  <script>
+
+    /* THEME */
+
+    const html = document.documentElement;
+    const themeBtn = document.getElementById("themeBtn");
+    const themeIcon = document.getElementById("themeIcon");
+
+    const savedTheme =
+      localStorage.getItem("amod-theme");
+
+    if (savedTheme) {
+      html.setAttribute("data-theme", savedTheme);
+    }
+
+    function updateThemeIcon() {
+
+      const theme =
+        html.getAttribute("data-theme");
+
+      themeIcon.className =
+        theme === "dark"
+          ? "fa-solid fa-moon"
+          : "fa-solid fa-sun";
+
+    }
+
+    updateThemeIcon();
+
+    themeBtn.addEventListener("click", () => {
+
+      const current =
+        html.getAttribute("data-theme");
+
+      const newTheme =
+        current === "dark"
+          ? "light"
+          : "dark";
+
+      html.setAttribute(
+        "data-theme",
+        newTheme
+      );
+
+      localStorage.setItem(
+        "amod-theme",
+        newTheme
+      );
+
+      updateThemeIcon();
+
+    });
+
+
+    /* MOBILE MENU */
+
+    const menuBtn =
+      document.getElementById("menuBtn");
+
+    const navLinks =
+      document.getElementById("navLinks");
+
+    menuBtn.addEventListener("click", () => {
+
+      navLinks.classList.toggle("active");
+
+      const icon =
+        menuBtn.querySelector("i");
+
+      if (navLinks.classList.contains("active")) {
+
+        icon.className =
+          "fa-solid fa-xmark";
+
+      } else {
+
+        icon.className =
+          "fa-solid fa-bars";
+
+      }
+
+    });
+
+
+    navLinks.querySelectorAll("a").forEach(link => {
+
+      link.addEventListener("click", () => {
+
+        navLinks.classList.remove("active");
+
+        menuBtn.querySelector("i").className =
+          "fa-solid fa-bars";
+
+      });
+
+    });
+
+
+    /* YEAR */
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+
+    /* BACK TO TOP */
+
+    const topBtn =
+      document.getElementById("topBtn");
+
+    window.addEventListener("scroll", () => {
+
+      if (window.scrollY > 500) {
+
+        topBtn.classList.add("show");
+
+      } else {
+
+        topBtn.classList.remove("show");
+
+      }
+
+    });
+
+    topBtn.addEventListener("click", () => {
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    });
+
+
+    /* CONTACT FORM */
+
+    const contactForm =
+      document.getElementById("contactForm");
+
+    const formStatus =
+      document.getElementById("formStatus");
+
+    contactForm.addEventListener("submit", (event) => {
+
+      event.preventDefault();
+
+      const name =
+        document.getElementById("name").value.trim();
+
+      const email =
+        document.getElementById("email").value.trim();
+
+      const subject =
+        document.getElementById("subject").value.trim();
+
+      const message =
+        document.getElementById("message").value.trim();
+
+      const body =
+        `Name: ${name}%0D%0A` +
+        `Email: ${email}%0D%0A%0D%0A` +
+        `${message}`;
+
+      window.location.href =
+        `mailto:?subject=${encodeURIComponent(subject)}&body=${body}`;
+
+      formStatus.style.display = "block";
+
+      formStatus.textContent =
+        "Your email application should now open with the message prepared.";
+
+    });
+
+
+    /* AI NEURAL NETWORK BACKGROUND */
+
+    const canvas =
+      document.getElementById("neuralCanvas");
+
+    const ctx =
+      canvas.getContext("2d");
+
+    let particles = [];
+
+    const particleCount =
+      window.innerWidth < 700 ? 25 : 50;
+
+    const maxDistance = 130;
+
+
+    function resizeCanvas() {
+
+      canvas.width =
+        window.innerWidth;
+
+      canvas.height =
+        window.innerHeight;
+
+    }
+
+    resizeCanvas();
+
+    window.addEventListener(
+      "resize",
+      resizeCanvas
+    );
+
+
+    class Particle {
+
+      constructor() {
+
+        this.x =
+          Math.random() * canvas.width;
+
+        this.y =
+          Math.random() * canvas.height;
+
+        this.vx =
+          (Math.random() - .5) * .6;
+
+        this.vy =
+          (Math.random() - .5) * .6;
+
+        this.radius =
+          Math.random() * 1.4 + .8;
+
+      }
+
+
+      update() {
+
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (
+          this.x < 0 ||
+          this.x > canvas.width
+        ) {
+
+          this.vx *= -1;
+
+        }
+
+        if (
+          this.y < 0 ||
+          this.y > canvas.height
+        ) {
+
+          this.vy *= -1;
+
+        }
+
+      }
+
+
+      draw() {
+
+        ctx.beginPath();
+
+        ctx.arc(
+          this.x,
+          this.y,
+          this.radius,
+          0,
+          Math.PI * 2
+        );
+
+        ctx.fillStyle =
+          "#8b5cf6";
+
+        ctx.fill();
+
+      }
+
+    }
+
+
+    for (
+      let i = 0;
+      i < particleCount;
+      i++
+    ) {
+
+      particles.push(
+        new Particle()
+      );
+
+    }
+
+
+    function animate() {
+
+      ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
+
+      for (
+        let i = 0;
+        i < particles.length;
+        i++
+      ) {
+
+        const p =
+          particles[i];
+
+        p.update();
+        p.draw();
+
+        for (
+          let j = i + 1;
+          j < particles.length;
+          j++
+        ) {
+
+          const p2 =
+            particles[j];
+
+          const dx =
+            p.x - p2.x;
+
+          const dy =
+            p.y - p2.y;
+
+          const distance =
+            Math.sqrt(
+              dx * dx +
+              dy * dy
+            );
+
+          if (
+            distance < maxDistance
+          ) {
+
+            ctx.beginPath();
+
+            ctx.strokeStyle =
+              `rgba(139,92,246,${(
+                1 - distance / maxDistance
+              ) * .35})`;
+
+            ctx.lineWidth = .6;
+
+            ctx.moveTo(
+              p.x,
+              p.y
+            );
+
+            ctx.lineTo(
+              p2.x,
+              p2.y
+            );
+
+            ctx.stroke();
+
+          }
+
+        }
+
+      }
+
+      requestAnimationFrame(
+        animate
+      );
+
+    }
+
+    animate();
+
+  </script>
+
+</body>
+
+</html>
